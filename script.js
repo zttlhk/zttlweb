@@ -1,4 +1,5 @@
 // ZENITH TERRA TECH LIMITED - Main JavaScript
+// Performance optimized version
 
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all functionality
@@ -8,21 +9,26 @@ document.addEventListener('DOMContentLoaded', function() {
     initAnimations();
 });
 
-// Navigation functionality
+// Debounce helper for scroll events
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Navigation functionality - Merged scroll listeners with debounce
 function initNavigation() {
     const navbar = document.querySelector('.navbar');
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
-
-    // Sticky navbar on scroll
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    });
+    const sections = document.querySelectorAll('section[id]');
 
     // Mobile menu toggle
     if (hamburger) {
@@ -40,11 +46,14 @@ function initNavigation() {
         });
     });
 
-    // Highlight active nav link on scroll
-    const sections = document.querySelectorAll('section[id]');
-    
-    window.addEventListener('scroll', function() {
+    // Merged scroll handler with debounce (60ms)
+    const handleScroll = debounce(function() {
+        // Sticky navbar
+        navbar.classList.toggle('scrolled', window.scrollY > 50);
+
+        // Highlight active nav link
         let current = '';
+        const scrollY = window.scrollY;
         
         sections.forEach(section => {
             const sectionTop = section.offsetTop - 100;
@@ -61,7 +70,9 @@ function initNavigation() {
                 link.classList.add('active');
             }
         });
-    });
+    }, 60);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
 }
 
 // Smooth scroll for anchor links
@@ -111,7 +122,7 @@ function initScrollEffects() {
 
     // Observe elements for animation
     const animateElements = document.querySelectorAll(
-        '.about-card, .product-card, .partner-card, .value-item, .contact-card, .opp-item, .coverage-item'
+        '.about-card, .product-card, .partner-card, .value-item, .contact-card, .opp-item, .coverage-item, .cert-card'
     );
     
     animateElements.forEach(el => {
@@ -120,48 +131,44 @@ function initScrollEffects() {
     });
 }
 
-// Counter animation
+// Counter animation with protection for non-numeric values
 function animateCounter(element) {
     if (element.classList.contains('animated')) return;
     
-    const text = element.textContent;
-    const number = parseInt(text.replace(/[^0-9]/g, ''));
-    const suffix = text.replace(/[0-9]/g, '');
+    const text = element.textContent.trim();
+    const number = parseFloat(text.replace(/[^0-9.]/g, ''));
     
-    if (!isNaN(number) && number > 0) {
-        element.classList.add('animated');
-        let current = 0;
-        const increment = Math.ceil(number / 30);
-        const duration = 1500;
-        const stepTime = duration / (number / increment);
-        
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= number) {
-                current = number;
-                clearInterval(timer);
-            }
-            element.textContent = current + suffix;
-        }, stepTime);
-    }
+    // Skip non-numeric values or values that don't make sense to animate (years, large numbers)
+    if (isNaN(number) || number > 9999 || number === 0) return;
+    
+    element.classList.add('animated');
+    
+    const suffix = text.replace(/[0-9.]/g, '');
+    let current = 0;
+    const increment = Math.ceil(number / 30);
+    const duration = 1500;
+    const stepTime = duration / (number / increment);
+    
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= number) {
+            current = number;
+            clearInterval(timer);
+        }
+        element.textContent = current + suffix;
+    }, stepTime);
 }
 
-// Initialize animations
+// Initialize animations using CSS classes instead of inline styles
 function initAnimations() {
-    // Add CSS class for initial animations
+    // Add loaded class to body for CSS animations
     document.body.classList.add('loaded');
     
-    // Hero content stagger animation
+    // Add hero-animate class to hero elements for CSS-based stagger animation
     const heroElements = document.querySelectorAll('.hero-badge, .hero-title, .hero-subtitle, .hero-cta, .hero-stats');
     heroElements.forEach((el, index) => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        
-        setTimeout(() => {
-            el.style.transition = 'all 0.6s ease';
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
-        }, 200 + (index * 150));
+        el.classList.add('hero-animate');
+        el.style.transitionDelay = (200 + (index * 150)) + 'ms';
     });
 }
 
@@ -171,35 +178,33 @@ function validateEmail(email) {
     return re.test(email);
 }
 
-// Debounce helper for scroll events
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Performance: Lazy load images (for future expansion)
+// Performance: Lazy load images
 function lazyLoadImages() {
     const images = document.querySelectorAll('img[data-src]');
     
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
-                observer.unobserve(img);
-            }
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                    img.classList.add('loaded');
+                    observer.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '50px 0px'
         });
-    });
 
-    images.forEach(img => imageObserver.observe(img));
+        images.forEach(img => imageObserver.observe(img));
+    } else {
+        // Fallback for browsers without IntersectionObserver
+        images.forEach(img => {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+        });
+    }
 }
 
 // Mobile detection for touch optimizations
@@ -212,6 +217,6 @@ if (isTouchDevice()) {
     document.body.classList.add('touch-device');
 }
 
-// Console branding
-console.log('%c ZENITH TERRA TECH LIMITED ', 'background: linear-gradient(135deg, #0f4c81, #00a896); color: white; font-size: 20px; font-weight: bold; padding: 10px 20px; border-radius: 5px;');
-console.log('%c Bridging Cutting-Edge Biopharmaceutical Technology with Southeast Asian Markets ', 'color: #0f4c81; font-size: 12px;');
+// Console branding - matching website copy
+console.log('%c ZENITH TERRA TECH LIMITED ', 'background: linear-gradient(135deg, #C41E3A, #D4AF37); color: white; font-size: 20px; font-weight: bold; padding: 10px 20px; border-radius: 5px;');
+console.log('%c One-Stop Solution for Global Pharmaceutical & Healthcare ', 'color: #C41E3A; font-size: 12px;');
