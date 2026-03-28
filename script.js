@@ -218,5 +218,5 @@ if (isTouchDevice()) {
 }
 
 // Console branding - matching website copy
-console.log('%c ZENITH TERRA TECH LIMITED ', 'background: linear-gradient(135deg, #C41E3A, #D4AF37); color: white; font-size: 20px; font-weight: bold; padding: 10px 20px; border-radius: 5px;');
-console.log('%c One-Stop Solution for Global Pharmaceutical & Healthcare ', 'color: #C41E3A; font-size: 12px;');
+console.log('%c ZENITH TERRA TECH LIMITED ', 'background: linear-gradient(135deg, #165DFF, #F7BA1E); color: white; font-size: 20px; font-weight: bold; padding: 10px 20px; border-radius: 5px;');
+console.log('%c One-Stop Solution for Global Pharmaceutical & Healthcare ', 'color: #165DFF; font-size: 12px;');
