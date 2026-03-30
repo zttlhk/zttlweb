@@ -74,8 +74,11 @@ function initNavigation() {
     // Close mobile menu when clicking outside
     document.addEventListener('click', function(e) {
         if (navMenu && navMenu.classList.contains('active')) {
-            if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
+            if (!navMenu.contains(e.target) && !e.target.closest('.nav-toggle')) {
                 navMenu.classList.remove('active');
+                const icon = navToggle ? navToggle.querySelector('i') : null;
+                if (icon) icon.className = 'fas fa-bars';
+                document.body.style.overflow = '';
             }
         }
     });
@@ -84,11 +87,36 @@ function initNavigation() {
     const dropdowns = document.querySelectorAll('.nav-dropdown');
     dropdowns.forEach(dropdown => {
         const link = dropdown.querySelector('.nav-link');
-        if (link) {
+        const submenu = dropdown.querySelector('.dropdown-menu');
+        
+        if (link && submenu) {
             link.addEventListener('click', function(e) {
                 if (window.innerWidth <= 767) {
                     e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Close other dropdowns
+                    dropdowns.forEach(other => {
+                        if (other !== dropdown) {
+                            other.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current
                     dropdown.classList.toggle('active');
+                    
+                    // Toggle submenu visibility
+                    if (dropdown.classList.contains('active')) {
+                        submenu.style.display = 'block';
+                        submenu.style.maxHeight = submenu.scrollHeight + 'px';
+                    } else {
+                        submenu.style.maxHeight = '0';
+                        setTimeout(() => {
+                            if (!dropdown.classList.contains('active')) {
+                                submenu.style.display = 'none';
+                            }
+                        }, 300);
+                    }
                 }
             });
         }
@@ -113,8 +141,21 @@ function initNavigation() {
 
 function toggleNav() {
     const navMenu = document.getElementById('nav-menu');
+    const navToggle = document.querySelector('.nav-toggle');
+    
     if (navMenu) {
-        navMenu.classList.toggle('active');
+        const isActive = navMenu.classList.toggle('active');
+        
+        // Update toggle button icon
+        if (navToggle) {
+            const icon = navToggle.querySelector('i');
+            if (icon) {
+                icon.className = isActive ? 'fas fa-times' : 'fas fa-bars';
+            }
+        }
+        
+        // Prevent body scroll when menu is open
+        document.body.style.overflow = isActive ? 'hidden' : '';
     }
 }
 

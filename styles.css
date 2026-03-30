@@ -1869,7 +1869,14 @@ a:hover {
 
 @media (max-width: 767px) {
     .nav-toggle {
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        background: var(--color-gray-50);
+        border-radius: var(--radius-sm);
+        z-index: 1001;
     }
     
     .nav-menu {
@@ -1877,12 +1884,16 @@ a:hover {
         top: 72px;
         left: 0;
         right: 0;
+        width: 100%;
         background: var(--color-white);
         flex-direction: column;
         padding: var(--space-2);
         box-shadow: var(--shadow-lg);
         transform: translateX(-100%);
-        transition: transform var(--transition-base);
+        transition: transform 0.3s ease;
+        z-index: 999;
+        max-height: calc(100vh - 72px);
+        overflow-y: auto;
     }
     
     .nav-menu.active {
@@ -1903,6 +1914,13 @@ a:hover {
         background: var(--color-gray-50);
         margin-top: var(--space-1);
         display: none;
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.3s ease;
+    }
+    
+    .nav-dropdown.active .dropdown-menu {
+        display: block;
     }
     
     .nav-dropdown:hover .dropdown-menu,
