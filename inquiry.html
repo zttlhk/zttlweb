@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Inquiry | Request a Quote | Zenith Terra Tech Limited</title>
+    <meta name="description" content="Submit your inquiry for biopharmaceutical ingredients. We typically respond within 24 hours. High purity cosmetic peptides, NAD+ precursors, chromatography media.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- hCaptcha -->
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+</head>
+<body>
+    <!-- Cookie Consent Popup -->
+    <div id="cookie-consent" class="cookie-consent">
+        <div class="cookie-content">
+            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our <a href="cookie-policy.html">Cookie Policy</a> and <a href="privacy-policy.html">Privacy Policy</a>.</p>
+            <div class="cookie-buttons">
+                <button onclick="acceptCookies('necessary')" class="btn-cookie-secondary">Only Necessary</button>
+                <button onclick="acceptCookies('all')" class="btn-cookie-primary">Accept All</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="images/logo.jpg" alt="Zenith Terra Tech Limited Logo" class="nav-logo">
+            </div>
+            <button class="nav-toggle" onclick="toggleNav()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About Us</a></li>
+                <li class="nav-dropdown">
+                    <a href="products.html" class="nav-link">Products <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="cosmetic-peptides.html">Cosmetic Peptides</a></li>
+                        <li><a href="nad-precursors.html">NAD+ Precursor Series</a></li>
+                        <li><a href="chromatography-media.html">Chromatography Media</a></li>
+                    </ul>
+                </li>
+                <li><a href="qualifications.html" class="nav-link">Qualifications</a></li>
+                <li><a href="contact.html" class="nav-link">Contact Us</a></li>
+                <li><a href="inquiry.html" class="nav-link nav-cta active">Inquiry</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Online Inquiry</h1>
+            <p>Request a Quote for Biopharmaceutical Ingredients</p>
+        </div>
+    </section>
+
+    <!-- Inquiry Form Section -->
+    <section class="inquiry-section">
+        <div class="container">
+            <div class="inquiry-container">
+                <div class="inquiry-intro">
+                    <h2>Submit Your Inquiry</h2>
+                    <p>Please fill out the form below with your requirements. Our team typically responds within <strong>24 hours</strong> on working days.</p>
+                </div>
+                
+                <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="inquiry-form-full" id="inquiry-form">
+                    <!-- Personal Information -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-user"></i> Contact Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="company">Company Name *</label>
+                            <input type="text" id="company" name="company" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Country/Region</label>
+                                <input type="text" id="country" name="country">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Selection -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-flask"></i> Product Information</h3>
+                        <div class="form-group">
+                            <label for="product">Product(s) of Interest *</label>
+                            <select id="product" name="product" required>
+                                <option value="">Select Product</option>
+                                <optgroup label="I. Cosmetic Peptides">
+                                    <option value="Acetyl Hexapeptide-8">Acetyl Hexapeptide-8 (Argireline / Botox-like peptide) - CAS: 616204-22-9</option>
+                                    <option value="Palmitoyl Pentapeptide-4">Palmitoyl Pentapeptide-4 (Matrixyl) - CAS: 214047-00-4</option>
+                                    <option value="Copper Peptide">Copper Peptide (GHK-Cu) - CAS: 49557-75-7</option>
+                                    <option value="Palmitoyl Tripeptide-5">Palmitoyl Tripeptide-5 - CAS: 623172-06-1</option>
+                                    <option value="Palmitoyl Tetrapeptide-7">Palmitoyl Tetrapeptide-7 - CAS: 221227-05-0</option>
+                                    <option value="Oligopeptide-1">Oligopeptide-1 (EGF analog) - CAS: 62253-63-8</option>
+                                </optgroup>
+                                <optgroup label="II. NAD+ Precursor Series">
+                                    <option value="NMN">NMN (β-Nicotinamide Mononucleotide) - CAS: 1094-61-7</option>
+                                    <option value="NR">NR (Nicotinamide Riboside) - CAS: 1341-23-7</option>
+                                    <option value="NAD+">NAD+ (Nicotinamide Adenine Dinucleotide) - CAS: 53-84-9</option>
+                                </optgroup>
+                                <optgroup label="III. Chromatography Media">
+                                    <option value="Ion Exchange">Ion Exchange Chromatography Media</option>
+                                    <option value="Affinity">Affinity Chromatography Media</option>
+                                    <option value="Size Exclusion">Size Exclusion Chromatography Media</option>
+                                    <option value="High Performance">High-performance Chromatographic Resins</option>
+                                </optgroup>
+                                <option value="Multiple">Multiple Products - Please specify</option>
+                                <option value="Other">Other - Please specify in message</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="quantity">Quantity Demand</label>
+                            <input type="text" id="quantity" name="quantity" placeholder="e.g., 1kg, 10kg, 100L, etc.">
+                        </div>
+                    </div>
+
+                    <!-- Message -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-comment"></i> Your Message</h3>
+                        <div class="form-group">
+                            <label for="message">Detailed Message *</label>
+                            <textarea id="message" name="message" rows="6" required placeholder="Please describe your requirements in detail. Include any specific purity requirements, intended use, delivery timeline, or questions you may have."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Privacy Consent -->
+                    <div class="form-section privacy-consent">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="privacy" required>
+                            <span>I agree to the <a href="privacy-policy.html">Privacy Policy</a> and consent to having my data processed in accordance with GDPR regulations. *</span>
+                        </label>
+                    </div>
+
+                    <!-- hCaptcha -->
+                    <div class="form-section captcha-section">
+                        <p class="captcha-note">Please complete the verification below:</p>
+                        <div class="h-captcha" data-sitekey="YOUR_HCAPTCHA_SITE_KEY"></div>
+                    </div>
+
+                    <!-- Submit -->
+                    <div class="form-submit">
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <i class="fas fa-paper-plane"></i> Submit Inquiry
+                        </button>
+                    </div>
+
+                    <p class="form-note centered">If the form fails to submit, please send your inquiry directly to <a href="mailto:contact@zenith-terra.com">contact@zenith-terra.com</a></p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alternative Contact -->
+    <section class="alt-contact">
+        <div class="container">
+            <div class="alt-contact-grid">
+                <div class="alt-contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <h4>Email Us Directly</h4>
+                    <p><a href="mailto:contact@zenith-terra.com">contact@zenith-terra.com</a></p>
+                </div>
+                <div class="alt-contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <h4>WhatsApp Business</h4>
+                    <p><a href="https://wa.me/85269340494?text=Hi, I'm interested in your biopharmaceutical ingredients, please contact me with more details." target="_blank">+852 6934 0494</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Zenith Terra Tech Limited</h4>
+                    <p>Hong Kong SAR</p>
+                    <p><a href="https://ztthk.com">ztthk.com</a></p>
+                    <p><a href="mailto:contact@zenith-terra.com">contact@zenith-terra.com</a></p>
+                    <p>
+                        <a href="https://wa.me/85269340494" class="whatsapp-link" target="_blank">
+                            <i class="fab fa-whatsapp"></i> +852 6934 0494
+                        </a>
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="qualifications.html">Qualifications</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="inquiry.html">Inquiry</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Compliance</h4>
+                    <ul>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Zenith Terra Tech Limited. All rights reserved.</p>
+                <p>Hong Kong Registered Company</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
