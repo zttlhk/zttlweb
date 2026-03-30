@@ -2056,7 +2056,7 @@ textarea:focus-visible {
    ============================================ */
 .whatsapp-float {
     position: fixed;
-    bottom: 24px;
+    bottom: 100px;
     right: 24px;
     z-index: 9999;
 }
@@ -2183,6 +2183,8 @@ textarea:focus-visible {
     top: 90px;
     right: 24px;
     z-index: 9998;
+    display: block !important;
+    visibility: visible !important;
 }
 
 /* Google Translate widget styling */
