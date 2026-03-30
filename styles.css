@@ -303,11 +303,11 @@ a:hover {
    ============================================ */
 .hero {
     position: relative;
-    min-height: 100vh;
+    min-height: auto;
+    padding: 140px 0 80px;
     display: flex;
     align-items: center;
     background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
-    padding-top: 72px;
     overflow: hidden;
 }
 
@@ -325,21 +325,21 @@ a:hover {
 .hero-content {
     position: relative;
     max-width: 800px;
-    padding: var(--space-6) 0;
+    padding: 0;
 }
 
 .hero-title {
-    font-size: 48px;
+    font-size: 42px;
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.25;
     color: var(--color-gray-900);
-    margin-bottom: var(--space-3);
+    margin-bottom: var(--space-2);
 }
 
 .hero-subtitle {
-    font-size: 20px;
-    color: var(--color-gray-700);
-    margin-bottom: var(--space-4);
+    font-size: 18px;
+    color: var(--color-gray-600);
+    margin-bottom: var(--space-3);
 }
 
 .hero-cta {
