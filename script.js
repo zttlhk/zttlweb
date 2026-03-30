@@ -64,11 +64,22 @@ function disableAnalyticsCookies() {
 // ============================================
 function initNavigation() {
     // Mobile nav toggle
-    const navToggle = document.querySelector('.nav-toggle');
+    const navToggle = document.getElementById('nav-toggle') || document.querySelector('.nav-toggle');
     const navMenu = document.getElementById('nav-menu');
     
     if (navToggle && navMenu) {
-        navToggle.addEventListener('click', toggleNav);
+        // Bind click event
+        navToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleNav();
+        });
+        
+        // Touch event for mobile
+        navToggle.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            toggleNav();
+        });
     }
     
     // Close mobile menu when clicking outside
