@@ -2062,19 +2062,20 @@ textarea:focus-visible {
 }
 
 .whatsapp-float-btn {
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     width: 60px;
     height: 60px;
-    background: #25D366;
-    color: #fff;
+    background: #25D366 !important;
+    color: #fff !important;
     border-radius: 50%;
     font-size: 32px;
     box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4), 0 2px 4px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
     position: relative;
     animation: whatsapp-pulse 2s infinite;
+    text-decoration: none !important;
 }
 
 .whatsapp-float-btn:hover {
